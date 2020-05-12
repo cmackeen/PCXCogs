@@ -30,7 +30,19 @@ class Wikipedia(commands.Cog):
         "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikimedia-logo.png"
         "/600px-Wikimedia-logo.png"
     )
-
+    
+    @commands.command(aliases=["add"])
+    async def create(self, ctx: commands.Context, key: str, *, text: str):
+        """Create a reminder. Same as [p]remindme.
+        Accepts: seconds, minutes, hours, days, weeks
+        Examples:
+        - [p]reminder create 2min Do that thing soon in 2 minutes
+        - [p]remindme create 3h40m Do that thing later in 3 hours and 40 minutes
+        - [p]reminder create 3 days Have sushi with Ryan and Heather
+        """
+        dfct[key] = text
+        return 
+    
     @commands.command(aliases=["wiki"])
     async def wikipedia(self, ctx: commands.Context, *, query: str):
         """Get information from Wikipedia."""
