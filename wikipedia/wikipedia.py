@@ -8,6 +8,19 @@ from redbot.core.utils.chat_formatting import error, warning
 __author__ = "PhasecoreX"
 
 
+class KeyDict(dict):
+  def __missing__(self,key):
+    return key
+  
+dfct=KeyDict()
+dfct["keith"]="female figure"
+dfct["Keith"]="female figure"
+
+dfct["jeff"]="hyperhidrosis"
+dfct["Jeff"]="hyperhidrosis"
+dfct["jon"]="stoner rock"
+dfct["John"]="stoner rock"
+
 class Wikipedia(commands.Cog):
     """Look up stuff on Wikipedia."""
 
@@ -21,7 +34,7 @@ class Wikipedia(commands.Cog):
     @commands.command(aliases=["wiki"])
     async def wikipedia(self, ctx: commands.Context, *, query: str):
         """Get information from Wikipedia."""
-        payload = self.generate_payload(query)
+        payload = self.generate_payload(dfct[query])
         conn = aiohttp.TCPConnector()
         async with aiohttp.ClientSession(connector=conn) as session:
             async with session.get(
